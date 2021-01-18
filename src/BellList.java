@@ -26,12 +26,14 @@ public class BellList extends LinkedList<Bell> {
     
     public void updateBell() {
         Bell bell = new Bell(KeyboardIO.getNoneEmptyString("Enter new bell Id: ", "Id cannot be empty!"));
-        if (this.contains(bell)) {
-            bell.setFrequency(KeyboardIO.getDouble("Enter new frequency: ", "Frequency must be a number!"));
-            bell.setWeight(KeyboardIO.getDouble("Enter new weight: ", "Weight must be a number!"));
-            System.out.println("Update successfully!");
-        } else {
+        int pos = this.indexOf(bell);
+        if (pos < 0) {
             System.out.println("Id: " + bell.getId() + " is not existed!");
+        } else {
+            Bell oldBell = this.get(pos);
+            oldBell.setFrequency(KeyboardIO.getDouble("Enter new frequency: ", "Frequency must be a number!"));
+            oldBell.setWeight(KeyboardIO.getDouble("Enter new weight: ", "Weight must be a number!"));
+            System.out.println("Update successfully!");
         }
     }
     
